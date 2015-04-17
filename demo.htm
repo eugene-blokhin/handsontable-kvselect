@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>kvselect-demo</title>
+    <script src="lib/handsontable/handsontable.full.js"></script> 
+    <script src="dist/handsontable.kvselect.full-0.1.js"></script> 
+    <link href="lib/handsontable/handsontable.full.css" rel="stylesheet">
+</head>
+<body>
+    <div id="spreadsheet"/>
+    <script>
+        var regularSelectData = ["One", "Tow", "Three", "Four"];
+        var kvselectData = [
+            { key: 1, value: "One" },
+            { key: 2, value: "Two" },
+            { key: 3, value: "Three" },
+            { key: 4, value: "Four" }
+        ];
+
+        var data = [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 },
+            { value: 4 }
+        ]
+
+        var container = document.getElementById('spreadsheet');
+        var hot = new Handsontable(container,
+        {
+            data: data,
+			colHeaders: [
+				"kvselect view",
+				"numeric view"
+			],
+			columns:[
+				{ 
+					//Map the column to field 'value'
+					data: "value", 
+					type: "kvselect",
+					
+					keyParamName: "key",
+					valueParamName: "value",
+					source: kvselectData
+				},
+				{
+					//The same field, but different representation
+					data: "value",
+					type: "numeric"
+				}
+			],
+            minSpareRows: 1
+        });
+
+    </script>
+</body>
+</html>
